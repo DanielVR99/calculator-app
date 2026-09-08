@@ -53,6 +53,27 @@ func TestCalculate(t *testing.T) {
 			operation:     "unknown",
 			expectAnError: true,
 		},
+		{
+			name:      "power of two numbers",
+			a:         2,
+			b:         3,
+			operation: "power",
+			expected:  8,
+		},
+		{
+			name:      "power of two numbers, one is zero",
+			a:         5,
+			b:         0,
+			operation: "power",
+			expected:  1,
+		},
+		{
+			name:      "power of two numbers, one is decimal",
+			a:         5,
+			b:         0.5,
+			operation: "power",
+			expected:  2.23,
+		},
 	}
 
 	for _, test := range tests {

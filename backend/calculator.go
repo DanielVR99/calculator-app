@@ -1,6 +1,9 @@
 package main
 
-import "errors"
+import (
+	"errors"
+	"math"
+)
 
 func calculate(a float64, b float64, operation string) (float64, error) {
 	switch operation {
@@ -15,6 +18,8 @@ func calculate(a float64, b float64, operation string) (float64, error) {
 			return 0, errors.New("cannot divide by zero")
 		}
 		return a / b, nil
+	case "power":
+		return math.Round(math.Pow(a, b)*100) / 100, nil
 	default:
 		return 0, errors.New("invalid operation")
 	}
