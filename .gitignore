@@ -7,3 +7,4 @@ backend/calculator-api
 # Environment files
 .env
 backend/coverage.out
+backend/coverage.out
