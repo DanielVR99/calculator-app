@@ -72,7 +72,21 @@ func TestCalculate(t *testing.T) {
 			a:         5,
 			b:         0.5,
 			operation: "power",
-			expected:  2.23,
+			expected:  2.24,
+		},
+		{
+			name:      "square root of a number",
+			a:         25,
+			b:         0,
+			operation: "sqrt",
+			expected:  5,
+		},
+		{
+			name:          "rejects square root of negative number",
+			a:             -25,
+			b:             0,
+			operation:     "sqrt",
+			expectAnError: true,
 		},
 	}
 
