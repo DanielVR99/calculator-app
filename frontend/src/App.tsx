@@ -13,6 +13,7 @@ function App() {
   const [result, setResult] = useState<number | null>(null);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const needsSecondNumber = operation !== "sqrt";
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -20,9 +21,11 @@ function App() {
     setError("");
     setResult(null);
 
-    if (firstNumber.trim() === "" || secondNumber.trim() === "") {
-      setError("Please enter both numbers.");
-      return;
+    if (
+      firstNumber.trim() === "" ||
+      (needsSecondNumber && secondNumber.trim() === "")) {
+        setError("Please enter both numbers.");
+        return;
     }
 
     setIsLoading(true);
@@ -82,17 +85,23 @@ function App() {
             <option value="subtract">Subtraction (−)</option>
             <option value="multiply">Multiplication (×)</option>
             <option value="divide">Division (÷)</option>
+            <option value="power">Power (^)</option>
+            <option value="sqrt">Square Root (√)</option>
           </select>
 
-          <label htmlFor="second-number">Second number</label>
-          <input
-            id="second-number"
-            type="number"
-            value={secondNumber}
-            onChange={(event) => setSecondNumber(event.target.value)}
-            placeholder="e.g. 5"
-            step="any"
-          />
+          {needsSecondNumber && (
+            <>
+              <label htmlFor="second-number">Second number</label>
+              <input
+                id="second-number"
+                type="number"
+                value={secondNumber}
+                onChange={(event) => setSecondNumber(event.target.value)}
+                placeholder="e.g. 5"
+                step="any"
+              />
+            </>
+          )}
 
           <button type="submit" disabled={isLoading}>
             {isLoading ? "Calculating..." : "Calculate"}
