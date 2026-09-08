@@ -1,0 +1,8 @@
+# macOS
+.DS_Store
+
+# Go
+backend/calculator-api
+
+# Environment files
+.env
