@@ -1,0 +1,97 @@
+.calculator-page {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  padding: 1.5rem;
+  background: #f4f7fb;
+}
+
+.calculator-card {
+  width: min(100%, 430px);
+  padding: 2rem;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 12px 30px rgba(24, 39, 75, 0.12);
+}
+
+.eyebrow {
+  margin: 0;
+  color: #4056a1;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 0.4rem 0;
+  color: #17223b;
+}
+
+.description {
+  margin: 0 0 1.5rem;
+  color: #5f6b7a;
+}
+
+form {
+  display: grid;
+  gap: 0.55rem;
+}
+
+label {
+  margin-top: 0.5rem;
+  color: #26344e;
+  font-weight: 600;
+}
+
+input,
+select,
+button {
+  box-sizing: border-box;
+  min-height: 44px;
+  width: 100%;
+  border-radius: 8px;
+  font: inherit;
+}
+
+input,
+select {
+  border: 1px solid #c7d0df;
+  padding: 0 0.75rem;
+  background: white;
+}
+
+button {
+  margin-top: 1rem;
+  border: 0;
+  background: #4056a1;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #304386;
+}
+
+button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.result,
+.error {
+  margin: 1.25rem 0 0;
+  padding: 0.85rem;
+  border-radius: 8px;
+}
+
+.result {
+  background: #e6f6ec;
+  color: #176538;
+}
+
+.error {
+  background: #fff0f0;
+  color: #a11f1f;
+}
