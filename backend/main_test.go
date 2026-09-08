@@ -68,3 +68,36 @@ func TestCalculateHandlerRejectsDivisionByZero(t *testing.T) {
 		t.Errorf("expected division-by-zero message, got %q", body.Error)
 	}
 }
+
+func TestCalculateHandlerRejectsPostMethod(t *testing.T) {
+	request := httptest.NewRequest(
+		http.MethodPost,
+		"/api/calculate",
+		nil,
+	)
+
+	recorder := httptest.NewRecorder()
+
+	calculateHandler(recorder, request)
+
+	response := recorder.Result()
+	defer response.Body.Close()
+
+	if response.StatusCode != http.StatusMethodNotAllowed {
+		t.Errorf(
+			"expected status %d, got %d",
+			http.StatusMethodNotAllowed,
+			response.StatusCode,
+		)
+	}
+
+	var body ErrorResponse
+	err := json.NewDecoder(response.Body).Decode(&body)
+	if err != nil {
+		t.Fatalf("could not decode response body: %v", err)
+	}
+
+	if body.Error != "Method not allowed" {
+		t.Errorf("expected method not allowed message, got %q", body.Error)
+	}
+}

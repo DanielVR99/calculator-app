@@ -22,6 +22,12 @@ func main() {
 }
 
 func calculateHandler(w http.ResponseWriter, r *http.Request) {
+
+	if r.Method == http.MethodPost {
+		writeError(w, "Method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+
 	a, err := strconv.ParseFloat(r.URL.Query().Get("a"), 64)
 	if err != nil {
 		writeError(w, "Parameter 'a' must be a number", http.StatusBadRequest)
@@ -45,6 +51,7 @@ func calculateHandler(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(CalculationResponse{Result: result})
+
 }
 
 func writeError(w http.ResponseWriter, message string, statusCode int) {
