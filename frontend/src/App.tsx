@@ -116,18 +116,35 @@ function App() {
           />
 
           <label htmlFor="operation">Operation</label>
-          <select
-            id="operation"
-            value={operation}
-            onChange={(event) => setOperation(event.target.value)}
-          >
-            <option value="add">Addition (+)</option>
-            <option value="subtract">Subtraction (−)</option>
-            <option value="multiply">Multiplication (×)</option>
-            <option value="divide">Division (÷)</option>
-            <option value="power">Power (^)</option>
-            <option value="sqrt">Square Root (√)</option>
-          </select>
+          <div className="operation-control">
+            <select
+              id="operation"
+              value={operation}
+              onChange={(event) => setOperation(event.target.value)}
+            >
+              <option value="add">Addition (+)</option>
+              <option value="subtract">Subtraction (−)</option>
+              <option value="multiply">Multiplication (×)</option>
+              <option value="divide">Division (÷)</option>
+              <option value="power">Power (^)</option>
+              <option value="sqrt">Square Root (√)</option>
+            </select>
+            {needsSecondNumber && (
+              <button type="button"  
+                className="swap-button"
+                aria-label="Swap first and second numbers"
+                title="Swap numbers"
+                onClick={() => {
+                  const temporaryNumber = firstNumber;
+                  setFirstNumber(secondNumber);
+                  setSecondNumber(temporaryNumber);
+                }}
+              >
+                ⇄
+              </button>   
+          )}
+
+          </div>
 
           {needsSecondNumber && (
             <>
@@ -146,6 +163,7 @@ function App() {
           <button type="submit" disabled={isLoading}>
             {isLoading ? "Calculating..." : "Calculate"}
           </button>
+                    
         </form>
 
         {result !== null && (

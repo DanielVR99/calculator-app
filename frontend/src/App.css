@@ -136,3 +136,26 @@ button:disabled {
   padding-left: 1.25rem;
   color: #3d4a5f;
 }
+
+.operation-control {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.swap-button {
+  min-height: 44px;
+  width: 44px;
+  margin: 0;
+  padding: 0;
+  border-radius: 8px;
+  background: #edf0fa;
+  color: #4056a1;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.swap-button:hover {
+  background: #dce2f5;
+}
