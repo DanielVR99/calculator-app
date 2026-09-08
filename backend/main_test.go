@@ -97,7 +97,7 @@ func TestCalculateHandlerRejectsPostMethod(t *testing.T) {
 		t.Fatalf("could not decode response body: %v", err)
 	}
 
-	if body.Error != "Method not allowed" {
+	if body.Error != "Method not allowed. Use GET" {
 		t.Errorf("expected method not allowed message, got %q", body.Error)
 	}
 }

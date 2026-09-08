@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"log"
 	"net/http"
 	"strconv"
 )
@@ -17,14 +18,24 @@ type ErrorResponse struct {
 func main() {
 	http.HandleFunc("/api/calculate", calculateHandler)
 
-	println("Backend running at http://localhost:8080")
-	http.ListenAndServe(":8080", nil)
+	log.Println("Backend running at http://localhost:8080")
+
+	if err := http.ListenAndServe(":8080", nil); err != nil {
+		log.Fatal(err)
+	}
 }
 
 func calculateHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:5173")
+	w.Header().Set("Access-Control-Allow-Methods", "GET, OPTIONS")
+
+	if r.Method == http.MethodOptions {
+		w.WriteHeader(http.StatusNoContent)
+		return
+	}
 
 	if r.Method == http.MethodPost {
-		writeError(w, "Method not allowed", http.StatusMethodNotAllowed)
+		writeError(w, "Method not allowed. Use GET", http.StatusMethodNotAllowed)
 		return
 	}
 
