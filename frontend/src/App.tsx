@@ -6,6 +6,12 @@ type ApiResponse = {
   error?: string;
 };
 
+type CalculationHistoryItem = {
+  id: string;
+  expression: string;
+  result: number;
+};
+
 function App() {
   const [firstNumber, setFirstNumber] = useState("");
   const [secondNumber, setSecondNumber] = useState("");
@@ -14,6 +20,7 @@ function App() {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const needsSecondNumber = operation !== "sqrt";
+  const [history, setHistory] = useState<CalculationHistoryItem[]>([]);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -44,7 +51,40 @@ function App() {
       }
 
       if (data.result !== undefined) {
-        setResult(data.result);
+        const calculationResult = data.result;
+        let expression = "";
+
+        switch (operation) {
+          case "add":
+            expression = `${firstNumber} + ${secondNumber}`;
+            break;
+          case "subtract":
+            expression = `${firstNumber} - ${secondNumber}`;
+            break;
+          case "multiply":
+            expression = `${firstNumber} × ${secondNumber}`;
+            break;
+          case "divide":
+            expression = `${firstNumber} ÷ ${secondNumber}`;
+            break;
+          case "power":
+            expression = `${firstNumber} ^ ${secondNumber}`;
+            break;
+          case "sqrt":
+            expression = `√${firstNumber}`;
+            break;
+        }
+
+        setResult(calculationResult);
+
+        setHistory((currentHistory) => [
+          {
+            id: crypto.randomUUID(),
+            expression,
+            result: calculationResult,
+          },
+          ...currentHistory,
+        ]);
       }
     } catch {
       setError(
@@ -118,6 +158,26 @@ function App() {
           <p className="error" role="alert">
             {error}
           </p>
+        )}
+
+        {history.length > 0 && (
+          <section className="history">
+            <div className="history-header">
+              <h2>Calculation history</h2>
+
+              <button type="button" className="clear-history" onClick={() => setHistory([])}>
+                Clear history
+              </button>
+            </div>
+
+            <ol>
+              {history.map((item) => (
+                <li key={item.id}>
+                  {item.expression} = <strong>{item.result}</strong>
+                </li>
+              ))}
+            </ol>
+          </section>
         )}
       </section>
     </main>

@@ -95,3 +95,44 @@ button:disabled {
   background: #fff0f0;
   color: #a11f1f;
 }
+
+.history {
+  margin-top: 1.5rem;
+  border-top: 1px solid #dce3ee;
+  padding-top: 1.25rem;
+}
+
+.history-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.history h2 {
+  margin: 0;
+  color: #17223b;
+  font-size: 1rem;
+}
+
+.clear-history {
+  min-height: auto;
+  width: auto;
+  margin: 0;
+  padding: 0.4rem 0.65rem;
+  background: transparent;
+  color: #4056a1;
+  font-size: 0.85rem;
+}
+
+.clear-history:hover {
+  background: #e8ecf8;
+}
+
+.history ol {
+  display: grid;
+  gap: 0.5rem;
+  margin: 1rem 0 0;
+  padding-left: 1.25rem;
+  color: #3d4a5f;
+}
